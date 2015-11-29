@@ -157,6 +157,7 @@
     add: function(attrStr, value, opts){
       var current = this.get(attrStr);
       if (!_.isArray(current)) throw new Error('current value is not an array');
+      this.trigger('add:' + attrStr, this, value);
       return this.set(attrStr + '[' + current.length + ']', value, opts);
     },
 
@@ -311,9 +312,9 @@
             model._delayedChange(attrStr, val[attr], opts);
           }
 
-          if (_.isArray(val[attr])){
-            model._delayedTrigger('add:' + attrStr, model, val[attr]);
-          }
+          //if (_.isArray(val[attr])){
+            //model._delayedTrigger('add:' + attrStr, model, val[attr]);
+          //}
         }
       });
     }
